@@ -9,6 +9,7 @@
 <body>
   <div class="container">
     <h1>Encuesta Laboral</h1>
+    <!-- Nota: Al enviar, el formulario se mandará a Formspree y mostrará su página de agradecimiento -->
     <form id="surveyForm" action="https://formspree.io/f/myzkpevr" method="POST">
       <!-- Input oculto para definir el asunto del correo en Formspree -->
       <input type="hidden" name="_subject" value="Nueva respuesta de la encuesta">
@@ -51,6 +52,7 @@
           <input type="text" id="salario" name="salario" required>
         </div>
         <div class="button-group">
+          <!-- El botón “Siguiente” solo intentará avanzar si la validación es correcta -->
           <button type="button" id="next1" class="next-btn">Siguiente</button>
         </div>
       </div>
@@ -189,6 +191,7 @@
         </div>
         <div class="button-group">
           <button type="button" id="prev3" class="prev-btn">Volver</button>
+          <!-- Al ser de tipo submit, la validación nativa se disparará antes de enviar -->
           <button type="submit" id="submitBtn" class="submit-btn">Enviar</button>
         </div>
       </div>

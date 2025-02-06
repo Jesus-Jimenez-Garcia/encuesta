@@ -12,85 +12,85 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Función para validar todos los campos (input, select, textarea) de la página actual
+  // Función de validación personalizada para la página actual.
+  // Se valida cada campo (y para grupos de radio se comprueba que se haya seleccionado al menos uno).
   function validatePage(page) {
+    let valid = true;
+    const radioGroups = new Set();
+
+    // Validar inputs (excepto radios) y recolectar nombres de radios
     const fields = page.querySelectorAll("input, select, textarea");
-    for (const field of fields) {
-      if (!field.checkValidity()) {
-        field.reportValidity();
-        return false;
+    fields.forEach(field => {
+      if (field.type === "radio") {
+        radioGroups.add(field.name);
+      } else {
+        if (!field.checkValidity()) {
+          field.reportValidity();
+          valid = false;
+        }
       }
-    }
-    return true;
+    });
+
+    // Validar que en cada grupo de radio se haya seleccionado alguna opción
+    radioGroups.forEach(name => {
+      const radios = page.querySelectorAll(`input[name="${name}"]`);
+      let isChecked = false;
+      radios.forEach(radio => {
+        if (radio.checked) isChecked = true;
+      });
+      if (!isChecked) {
+        // Reporta la validez sobre el primer radio del grupo
+        radios[0].reportValidity();
+        valid = false;
+      }
+    });
+
+    return valid;
   }
 
-  // Mostrar la primera página al iniciar
+  // Mostrar la primera página al cargar
   showPage(currentPage);
 
-  // Navegación con validación: solo avanzamos si la página actual está completa y sin errores
+  // Botón "Siguiente" de la página 1
   document.getElementById("next1").addEventListener("click", function () {
     if (validatePage(pages[currentPage])) {
       currentPage = 1;
       showPage(currentPage);
+    } else {
+      alert("Por favor, completa todos los campos obligatorios antes de continuar.");
     }
   });
 
+  // Botón "Siguiente" de la página 2
   document.getElementById("next2").addEventListener("click", function () {
     if (validatePage(pages[currentPage])) {
       currentPage = 2;
       showPage(currentPage);
+    } else {
+      alert("Por favor, completa todos los campos obligatorios antes de continuar.");
     }
   });
 
-  // Botones para volver a páginas anteriores
+  // Botones "Volver"
   document.getElementById("prev2").addEventListener("click", function () {
     currentPage = 0;
     showPage(currentPage);
   });
-
   document.getElementById("prev3").addEventListener("click", function () {
     currentPage = 1;
     showPage(currentPage);
   });
 
-  // Envío del formulario usando AJAX (fetch) para evitar redirecciones a la página de Formspree
-  document.getElementById("surveyForm").addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevenimos el envío tradicional
-    const form = this;
+  // No se interviene en el submit, se permite la validación nativa y el envío a Formspree.
+  // Así, tras el envío, se muestra la página de Formspree (thank you).
 
-    fetch(form.action, {
-      method: form.method,
-      body: new FormData(form),
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        alert("Encuesta enviada. ¡Gracias por participar!");
-        form.reset();         // Se borran las opciones seleccionadas
-        currentPage = 0;      // Se vuelve a la primera página
-        showPage(currentPage);
-      } else {
-        response.json().then(data => {
-          if (data.hasOwnProperty("errors")) {
-            alert(data["errors"].map(error => error["message"]).join(", "));
-          } else {
-            alert("Ocurrió un error al enviar la encuesta. Inténtalo nuevamente.");
-          }
-        });
-      }
-    })
-    .catch(error => {
-      alert("Ocurrió un error: " + error.message);
-    });
-  });
-
-  // Para asegurarnos de que, si el usuario vuelve al formulario (por ejemplo, usando el botón "volver" del navegador),
-  // se reinicie el formulario y se muestre la primera página.
+  // Al volver al formulario (por ejemplo, con el botón "atrás" del navegador), se resetea el formulario y se muestra la primera página.
   window.addEventListener("pageshow", function(event) {
     document.getElementById("surveyForm").reset();
     currentPage = 0;
     showPage(currentPage);
   });
+  
+  // Esta línea ayuda a que algunos navegadores no cacheen la página (forzando el unload)
+  window.onunload = function() {};
 });
