@@ -1,373 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Encuesta Laboral</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Encuesta</h1>
-      <form
-        id="surveyForm"
-        action="https://formspree.io/f/myzkpevr"
-        method="POST"
-      >
-        <input
-          type="hidden"
-          name="_subject"
-          value="Nueva respuesta de la encuesta"
-        />
-        <!-- Página 1: Datos Generales -->
-        <div class="form-page active" id="page1">
-          <h2>Datos Generales</h2>
-          <div class="form-group">
-            <label for="edad">Edad:</label>
-            <input
-              type="number"
-              id="edad"
-              name="edad"
-              min="0"
-              max="100"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="genero">Género:</label>
-            <select id="genero" name="genero" required>
-              <option value="">Seleccione</option>
-              <option value="Hombre">Hombre</option>
-              <option value="Mujer">Mujer</option>
-              <option value="Otro">Otro</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="antiguedad">Antigüedad en la empresa (años):</label>
-            <input
-              type="number"
-              id="antiguedad"
-              name="antiguedad"
-              min="0"
-              max="100"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="puesto">Puesto de trabajo:</label>
-            <input type="text" id="puesto" name="puesto" required />
-          </div>
-          <div class="form-group">
-            <label>Jornada laboral:</label>
-            <label
-              ><input type="radio" name="jornada" value="Completa" required />
-              Completa</label
-            >
-            <label
-              ><input type="radio" name="jornada" value="Parcial" required />
-              Parcial</label
-            >
-          </div>
-          <div class="form-group">
-            <label for="estudios">Nivel de estudios:</label>
-            <input type="text" id="estudios" name="estudios" required />
-          </div>
-          <div class="form-group">
-            <label for="salario">Rango de salario:</label>
-            <input type="text" id="salario" name="salario" required />
-          </div>
-          <div class="button-group">
-            <button type="button" id="next1" class="next-btn">Siguiente</button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encuesta Laboral</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Encuesta Laboral</h1>
+    <form id="surveyForm" action="https://formspree.io/f/myzkpevr" method="POST">
+      <!-- Input oculto para definir el asunto del correo en Formspree -->
+      <input type="hidden" name="_subject" value="Nueva respuesta de la encuesta">
+      
+      <!-- Página 1: Datos Generales -->
+      <div class="form-page active" id="page1">
+        <h2>Datos Generales</h2>
+        <div class="form-group">
+          <label for="edad">Edad:</label>
+          <input type="number" id="edad" name="edad" min="0" required>
+        </div>
+        <div class="form-group">
+          <label for="genero">Género:</label>
+          <select id="genero" name="genero" required>
+            <option value="">Seleccione</option>
+            <option value="Hombre">Hombre</option>
+            <option value="Mujer">Mujer</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="antiguedad">Antigüedad en la empresa (años):</label>
+          <input type="number" id="antiguedad" name="antiguedad" min="0" required>
+        </div>
+        <div class="form-group">
+          <label for="puesto">Puesto de trabajo:</label>
+          <input type="text" id="puesto" name="puesto" required>
+        </div>
+        <div class="form-group">
+          <label>Jornada laboral:</label>
+          <label><input type="radio" name="jornada" value="Completa" required> Completa</label>
+          <label><input type="radio" name="jornada" value="Parcial" required> Parcial</label>
+        </div>
+        <div class="form-group">
+          <label for="estudios">Nivel de estudios:</label>
+          <input type="text" id="estudios" name="estudios" required>
+        </div>
+        <div class="form-group">
+          <label for="salario">Rango de salario:</label>
+          <input type="text" id="salario" name="salario" required>
+        </div>
+        <div class="button-group">
+          <button type="button" id="next1" class="next-btn">Siguiente</button>
+        </div>
+      </div>
+      
+      <!-- Página 2: Satisfacción Laboral -->
+      <div class="form-page" id="page2">
+        <h2>Satisfacción Laboral</h2>
+        <div class="form-group">
+          <label>En una escala del 1 al 5, ¿qué tan satisfecho estás con tu trabajo?</label>
+          <div class="rating">
+            <label><input type="radio" name="satisfaccion" value="1" required> 1</label>
+            <label><input type="radio" name="satisfaccion" value="2"> 2</label>
+            <label><input type="radio" name="satisfaccion" value="3"> 3</label>
+            <label><input type="radio" name="satisfaccion" value="4"> 4</label>
+            <label><input type="radio" name="satisfaccion" value="5"> 5</label>
           </div>
         </div>
-
-        <!-- Página 2: Satisfacción Laboral -->
-        <div class="form-page" id="page2">
-          <h2>Satisfacción Laboral</h2>
-          <div class="form-group">
-            <label
-              >En una escala del 1 al 5, ¿qué tan satisfecho estás con tu
-              trabajo?</label
-            >
-            <div class="rating">
-              <label
-                ><input type="radio" name="satisfaccion" value="1" required />
-                1</label
-              >
-              <label
-                ><input type="radio" name="satisfaccion" value="2" /> 2</label
-              >
-              <label
-                ><input type="radio" name="satisfaccion" value="3" /> 3</label
-              >
-              <label
-                ><input type="radio" name="satisfaccion" value="4" /> 4</label
-              >
-              <label
-                ><input type="radio" name="satisfaccion" value="5" /> 5</label
-              >
-            </div>
-          </div>
-          <div class="form-group">
-            <label>¿Consideras que tu carga de trabajo es adecuada?</label>
-            <label
-              ><input type="radio" name="carga_trabajo" value="Sí" required />
-              Sí</label
-            >
-            <label
-              ><input type="radio" name="carga_trabajo" value="No" /> No</label
-            >
-          </div>
-          <div class="form-group">
-            <label
-              >¿Tienes claridad sobre tus responsabilidades y expectativas
-              laborales?</label
-            >
-            <label
-              ><input type="radio" name="claridad" value="Sí" required />
-              Sí</label
-            >
-            <label><input type="radio" name="claridad" value="No" /> No</label>
-          </div>
-          <div class="form-group">
-            <label>¿Recibes el apoyo necesario de tus encargados?</label>
-            <label
-              ><input
-                type="radio"
-                name="apoyo_encargados"
-                value="Sí"
-                required
-              />
-              Sí</label
-            >
-            <label
-              ><input type="radio" name="apoyo_encargados" value="No" />
-              No</label
-            >
-          </div>
-          <div class="form-group">
-            <label>¿Recibes el apoyo necesario de tus compañeros?</label>
-            <label
-              ><input
-                type="radio"
-                name="apoyo_companeros"
-                value="Sí"
-                required
-              />
-              Sí</label
-            >
-            <label
-              ><input type="radio" name="apoyo_companeros" value="No" />
-              No</label
-            >
-          </div>
-          <div class="form-group">
-            <label
-              >En una escala del 1 al 5, ¿cómo te sientes de valorado/a en tu
-              trabajo?</label
-            >
-            <div class="rating">
-              <label
-                ><input type="radio" name="valoracion" value="1" required />
-                1</label
-              >
-              <label
-                ><input type="radio" name="valoracion" value="2" /> 2</label
-              >
-              <label
-                ><input type="radio" name="valoracion" value="3" /> 3</label
-              >
-              <label
-                ><input type="radio" name="valoracion" value="4" /> 4</label
-              >
-              <label
-                ><input type="radio" name="valoracion" value="5" /> 5</label
-              >
-            </div>
-          </div>
-          <div class="form-group">
-            <label
-              >¿Consideras que puedes conciliar tu vida laboral, personal y
-              familiar?</label
-            >
-            <label
-              ><input type="radio" name="conciliacion" value="Sí" required />
-              Sí</label
-            >
-            <label
-              ><input type="radio" name="conciliacion" value="No" /> No</label
-            >
-          </div>
-          <div class="form-group">
-            <label>¿Se respeta tu tiempo libre?</label>
-            <label
-              ><input type="radio" name="tiempo_libre" value="Sí" required />
-              Sí</label
-            >
-            <label
-              ><input type="radio" name="tiempo_libre" value="No" /> No</label
-            >
-          </div>
-          <div class="button-group">
-            <button type="button" id="prev2" class="prev-btn">Volver</button>
-            <button type="button" id="next2" class="next-btn">Siguiente</button>
+        <div class="form-group">
+          <label>¿Consideras que tu carga de trabajo es adecuada?</label>
+          <label><input type="radio" name="carga_trabajo" value="Sí" required> Sí</label>
+          <label><input type="radio" name="carga_trabajo" value="No"> No</label>
+        </div>
+        <div class="form-group">
+          <label>¿Tienes claridad sobre tus responsabilidades y expectativas laborales?</label>
+          <label><input type="radio" name="claridad" value="Sí" required> Sí</label>
+          <label><input type="radio" name="claridad" value="No"> No</label>
+        </div>
+        <div class="form-group">
+          <label>¿Recibes el apoyo necesario de tus encargados?</label>
+          <label><input type="radio" name="apoyo_encargados" value="Sí" required> Sí</label>
+          <label><input type="radio" name="apoyo_encargados" value="No"> No</label>
+        </div>
+        <div class="form-group">
+          <label>¿Recibes el apoyo necesario de tus compañeros?</label>
+          <label><input type="radio" name="apoyo_companeros" value="Sí" required> Sí</label>
+          <label><input type="radio" name="apoyo_companeros" value="No"> No</label>
+        </div>
+        <div class="form-group">
+          <label>En una escala del 1 al 5, ¿cómo te sientes de valorado/a en tu trabajo?</label>
+          <div class="rating">
+            <label><input type="radio" name="valoracion" value="1" required> 1</label>
+            <label><input type="radio" name="valoracion" value="2"> 2</label>
+            <label><input type="radio" name="valoracion" value="3"> 3</label>
+            <label><input type="radio" name="valoracion" value="4"> 4</label>
+            <label><input type="radio" name="valoracion" value="5"> 5</label>
           </div>
         </div>
-
-        <!-- Página 3: Motivación Laboral -->
-        <div class="form-page" id="page3">
-          <h2>Motivación Laboral</h2>
-          <div class="form-group">
-            <label
-              >¿Cuánto de motivado/a te sientes para desempeñar tu trabajo
-              diariamente? (1-5):</label
-            >
-            <div class="rating">
-              <label
-                ><input type="radio" name="motivacion" value="1" required />
-                1</label
-              >
-              <label
-                ><input type="radio" name="motivacion" value="2" /> 2</label
-              >
-              <label
-                ><input type="radio" name="motivacion" value="3" /> 3</label
-              >
-              <label
-                ><input type="radio" name="motivacion" value="4" /> 4</label
-              >
-              <label
-                ><input type="radio" name="motivacion" value="5" /> 5</label
-              >
-            </div>
-          </div>
-          <div class="form-group">
-            <label
-              >¿Sientes que tienes oportunidades de desarrollo y
-              crecimiento?</label
-            >
-            <label
-              ><input type="radio" name="oportunidades" value="Sí" required />
-              Sí</label
-            >
-            <label
-              ><input type="radio" name="oportunidades" value="No" /> No</label
-            >
-          </div>
-          <div class="form-group">
-            <label>¿Recibes feedback sobre tu desempeño laboral?</label>
-            <label
-              ><input type="radio" name="feedback" value="Sí" required />
-              Sí</label
-            >
-            <label><input type="radio" name="feedback" value="No" /> No</label>
-          </div>
-          <div class="form-group">
-            <label>Mayor reconocimiento del desempeño (1-5):</label>
-            <div class="rating">
-              <label
-                ><input type="radio" name="reconocimiento" value="1" required />
-                1</label
-              >
-              <label
-                ><input type="radio" name="reconocimiento" value="2" /> 2</label
-              >
-              <label
-                ><input type="radio" name="reconocimiento" value="3" /> 3</label
-              >
-              <label
-                ><input type="radio" name="reconocimiento" value="4" /> 4</label
-              >
-              <label
-                ><input type="radio" name="reconocimiento" value="5" /> 5</label
-              >
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Incremento salarial o beneficios adicionales (1-5):</label>
-            <div class="rating">
-              <label
-                ><input type="radio" name="incremento" value="1" required />
-                1</label
-              >
-              <label
-                ><input type="radio" name="incremento" value="2" /> 2</label
-              >
-              <label
-                ><input type="radio" name="incremento" value="3" /> 3</label
-              >
-              <label
-                ><input type="radio" name="incremento" value="4" /> 4</label
-              >
-              <label
-                ><input type="radio" name="incremento" value="5" /> 5</label
-              >
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Mejor equilibrio entre vida personal y laboral (1-5):</label>
-            <div class="rating">
-              <label
-                ><input type="radio" name="equilibrio" value="1" required />
-                1</label
-              >
-              <label
-                ><input type="radio" name="equilibrio" value="2" /> 2</label
-              >
-              <label
-                ><input type="radio" name="equilibrio" value="3" /> 3</label
-              >
-              <label
-                ><input type="radio" name="equilibrio" value="4" /> 4</label
-              >
-              <label
-                ><input type="radio" name="equilibrio" value="5" /> 5</label
-              >
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Oportunidades de ascenso (1-5):</label>
-            <div class="rating">
-              <label
-                ><input type="radio" name="ascenso" value="1" required />
-                1</label
-              >
-              <label><input type="radio" name="ascenso" value="2" /> 2</label>
-              <label><input type="radio" name="ascenso" value="3" /> 3</label>
-              <label><input type="radio" name="ascenso" value="4" /> 4</label>
-              <label><input type="radio" name="ascenso" value="5" /> 5</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Mejor comunicación interna (1-5):</label>
-            <div class="rating">
-              <label
-                ><input type="radio" name="comunicacion" value="1" required />
-                1</label
-              >
-              <label
-                ><input type="radio" name="comunicacion" value="2" /> 2</label
-              >
-              <label
-                ><input type="radio" name="comunicacion" value="3" /> 3</label
-              >
-              <label
-                ><input type="radio" name="comunicacion" value="4" /> 4</label
-              >
-              <label
-                ><input type="radio" name="comunicacion" value="5" /> 5</label
-              >
-            </div>
-          </div>
-          <div class="button-group">
-            <button type="button" id="prev3" class="prev-btn">Volver</button>
-            <button type="submit" id="submitBtn" class="submit-btn">
-              Enviar
-            </button>
+        <div class="form-group">
+          <label>¿Consideras que puedes conciliar tu vida laboral, personal y familiar?</label>
+          <label><input type="radio" name="conciliacion" value="Sí" required> Sí</label>
+          <label><input type="radio" name="conciliacion" value="No"> No</label>
+        </div>
+        <div class="form-group">
+          <label>¿Se respeta tu tiempo libre?</label>
+          <label><input type="radio" name="tiempo_libre" value="Sí" required> Sí</label>
+          <label><input type="radio" name="tiempo_libre" value="No"> No</label>
+        </div>
+        <div class="button-group">
+          <button type="button" id="prev2" class="prev-btn">Volver</button>
+          <button type="button" id="next2" class="next-btn">Siguiente</button>
+        </div>
+      </div>
+      
+      <!-- Página 3: Motivación Laboral -->
+      <div class="form-page" id="page3">
+        <h2>Motivación Laboral</h2>
+        <div class="form-group">
+          <label>¿Cuánto de motivado/a te sientes para desempeñar tu trabajo diariamente? (1-5):</label>
+          <div class="rating">
+            <label><input type="radio" name="motivacion" value="1" required> 1</label>
+            <label><input type="radio" name="motivacion" value="2"> 2</label>
+            <label><input type="radio" name="motivacion" value="3"> 3</label>
+            <label><input type="radio" name="motivacion" value="4"> 4</label>
+            <label><input type="radio" name="motivacion" value="5"> 5</label>
           </div>
         </div>
-      </form>
-    </div>
-    <script src="script.js"></script>
-  </body>
+        <div class="form-group">
+          <label>¿Sientes que tienes oportunidades de desarrollo y crecimiento?</label>
+          <label><input type="radio" name="oportunidades" value="Sí" required> Sí</label>
+          <label><input type="radio" name="oportunidades" value="No"> No</label>
+        </div>
+        <div class="form-group">
+          <label>¿Recibes feedback sobre tu desempeño laboral?</label>
+          <label><input type="radio" name="feedback" value="Sí" required> Sí</label>
+          <label><input type="radio" name="feedback" value="No"> No</label>
+        </div>
+        <div class="form-group">
+          <label>Mayor reconocimiento del desempeño (1-5):</label>
+          <div class="rating">
+            <label><input type="radio" name="reconocimiento" value="1" required> 1</label>
+            <label><input type="radio" name="reconocimiento" value="2"> 2</label>
+            <label><input type="radio" name="reconocimiento" value="3"> 3</label>
+            <label><input type="radio" name="reconocimiento" value="4"> 4</label>
+            <label><input type="radio" name="reconocimiento" value="5"> 5</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Incremento salarial o beneficios adicionales (1-5):</label>
+          <div class="rating">
+            <label><input type="radio" name="incremento" value="1" required> 1</label>
+            <label><input type="radio" name="incremento" value="2"> 2</label>
+            <label><input type="radio" name="incremento" value="3"> 3</label>
+            <label><input type="radio" name="incremento" value="4"> 4</label>
+            <label><input type="radio" name="incremento" value="5"> 5</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Mejor equilibrio entre vida personal y laboral (1-5):</label>
+          <div class="rating">
+            <label><input type="radio" name="equilibrio" value="1" required> 1</label>
+            <label><input type="radio" name="equilibrio" value="2"> 2</label>
+            <label><input type="radio" name="equilibrio" value="3"> 3</label>
+            <label><input type="radio" name="equilibrio" value="4"> 4</label>
+            <label><input type="radio" name="equilibrio" value="5"> 5</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Oportunidades de ascenso (1-5):</label>
+          <div class="rating">
+            <label><input type="radio" name="ascenso" value="1" required> 1</label>
+            <label><input type="radio" name="ascenso" value="2"> 2</label>
+            <label><input type="radio" name="ascenso" value="3"> 3</label>
+            <label><input type="radio" name="ascenso" value="4"> 4</label>
+            <label><input type="radio" name="ascenso" value="5"> 5</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Mejor comunicación interna (1-5):</label>
+          <div class="rating">
+            <label><input type="radio" name="comunicacion" value="1" required> 1</label>
+            <label><input type="radio" name="comunicacion" value="2"> 2</label>
+            <label><input type="radio" name="comunicacion" value="3"> 3</label>
+            <label><input type="radio" name="comunicacion" value="4"> 4</label>
+            <label><input type="radio" name="comunicacion" value="5"> 5</label>
+          </div>
+        </div>
+        <div class="button-group">
+          <button type="button" id="prev3" class="prev-btn">Volver</button>
+          <button type="submit" id="submitBtn" class="submit-btn">Enviar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
 </html>
