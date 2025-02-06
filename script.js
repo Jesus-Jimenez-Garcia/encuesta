@@ -1,4 +1,3 @@
-// Esperamos a que el DOM esté cargado
 document.addEventListener("DOMContentLoaded", function () {
   const pages = document.querySelectorAll(".form-page");
   let currentPage = 0;
@@ -40,14 +39,36 @@ document.addEventListener("DOMContentLoaded", function () {
     showPage(currentPage);
   });
 
-  // Manejo del envío del formulario
+  // Manejo del envío del formulario con AJAX para integrar con Formspree
   document.getElementById("surveyForm").addEventListener("submit", function (e) {
-    // e.preventDefault();
-    // Aquí podrías hacer un fetch o cualquier acción para enviar los datos
-    alert("Encuesta enviada. ¡Gracias por participar!");
-    // Opcionalmente, puedes resetear el formulario o redirigir a otra página
-    // this.reset();
-    // currentPage = 0;
-    // showPage(currentPage);
+    e.preventDefault(); // Evita la recarga de la página
+    const form = this;
+
+    fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Encuesta enviada. ¡Gracias por participar!");
+        form.reset(); // Reinicia el formulario (borra los datos seleccionados)
+        currentPage = 0; // Vuelve a la primera página
+        showPage(currentPage);
+      } else {
+        response.json().then(data => {
+          if (data.hasOwnProperty("errors")) {
+            alert(data["errors"].map(error => error["message"]).join(", "));
+          } else {
+            alert("Ocurrió un error al enviar la encuesta. Inténtalo nuevamente.");
+          }
+        });
+      }
+    })
+    .catch(error => {
+      alert("Ocurrió un error: " + error.message);
+    });
   });
 });
