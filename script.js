@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Manejo del envío del formulario
   document.getElementById("surveyForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+    // e.preventDefault();
     // Aquí podrías hacer un fetch o cualquier acción para enviar los datos
     alert("Encuesta enviada. ¡Gracias por participar!");
     // Opcionalmente, puedes resetear el formulario o redirigir a otra página
