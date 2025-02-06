@@ -91,6 +91,4 @@ document.addEventListener("DOMContentLoaded", function () {
     showPage(currentPage);
   });
   
-  // Esta línea ayuda a que algunos navegadores no cacheen la página (forzando el unload)
-  window.onunload = function() {};
 });
